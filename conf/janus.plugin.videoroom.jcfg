@@ -50,6 +50,18 @@ general: {
 	#string_ids = true
 }
 
+room-123: {
+	description = "HiRes Room"
+	publishers = 2
+	fir_freq = 10
+	audiocodec = "opus"
+	videocodec = "vp8"
+	record = true
+	rec_dir = "/opt/janus/share/janus/recordings"
+	#notify_joining = true
+}
+
+
 room-1234: {
 	description = "Demo Room"
 	secret = "adminpwd"

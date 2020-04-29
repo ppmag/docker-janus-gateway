@@ -1,7 +1,7 @@
 FROM debian:latest
 
-LABEL maintainer="Linagora Folks <lgs-openpaas-dev@linagora.com>"
-LABEL description="Provides an image with Janus Gateway"
+LABEL maintainer="ppmag"
+LABEL description="Provides an image with Janus Gateway, fixed by ppmag"
 
 RUN apt-get update -y \
     && apt-get upgrade -y
@@ -110,10 +110,10 @@ COPY cert/*.* /opt/janus/share/janus/certs/
 COPY conf/*.jcfg /opt/janus/etc/janus/
 
 # copy demo sources to container 
-COPY html /root/janus-gateway/
+COPY html /root/janus-gateway/html
 
-COPY util/convert-mjr-to-webm.sh /opt/janus/share/janus/recordings/
-RUN  chmod +x /opt/janus/share/janus/recordings/convert-mjr-to-webm.sh
+#COPY util/convert-mjr-to-webm.sh /opt/janus/share/janus/recordings/
+#RUN  chmod +x /opt/janus/share/janus/recordings/convert-mjr-to-webm.sh
 
 RUN  mkdir /opt/janus/share/janus/recordings/list
 
@@ -123,4 +123,6 @@ EXPOSE 80 443 7088 8088 8089 8188
 EXPOSE 10000-10200/udp
 
 CMD sudo nginx -t && service nginx restart \
-    && /opt/janus/bin/janus -F /opt/janus/etc/janus -C /opt/janus/etc/janus/janus.jcfg --nat-1-1=${DOCKER_IP}
+    && /opt/janus/bin/janus -F /opt/janus/etc/janus -C /opt/janus/etc/janus/janus.jcfg 
+    
+    #--nat-1-1=${DOCKER_IP}
